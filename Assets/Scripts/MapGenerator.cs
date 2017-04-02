@@ -18,6 +18,12 @@ public class MapGenerator : MonoBehaviour {
 	[SerializeField]
 	private string seed = "";
 
+	[SerializeField]
+	private int wallThreshold = 4;
+
+	[SerializeField]
+	private int emptyThreshold = 3;
+
 	private int[,] map;
 
 	/// <summary>
@@ -111,10 +117,9 @@ public class MapGenerator : MonoBehaviour {
 			for (int y = 0; y < h; ++ y)
 			{
 				int n = GetNeighboringWallCount(map, x, y);
-				int t = 4;
 
-				if (n > t) map[x,y] = 1;
-				else if (n < t) map[x,y] = 0;
+				if (n > wallThreshold) map[x,y] = 1;
+				else if (n < emptyThreshold) map[x,y] = 0;
 			}
 		}
 	}
